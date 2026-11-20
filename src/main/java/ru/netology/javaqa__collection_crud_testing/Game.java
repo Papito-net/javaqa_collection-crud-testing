@@ -1,28 +1,26 @@
 package ru.netology.javaqa__collection_crud_testing;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // Класс для управления турниром
 public class Game {
-    private List<Player> players = new ArrayList<>();
+    // Замена List<Player> на Map<String, Player>
+    private Map<String, Player> players = new HashMap<>();
 
-    // Метод регистрации игрока
+    // В метод регистрации игрока добавляем пару: ключ(имя)-значение(объект)
     public void register(Player player) {
-        players.add(player);
+        players.put(player.getName(), player);
     }
 
     // Метод поиска информации об игроке
     public Player findByName(String name) {
-        for (Player player : players) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
+        // Убрали цикл. Метод get() сразу вернет игрока по ключу или null, если его нет
+        return players.get(name);
     }
 
-    // Метод соревнования между двумя игроками: проверка наличия регистрации и сравнение силы игроков.
+    // Метод соревнования между двумя игроками: проверка наличия регистрации и сравнение силы игроков
     public int round(String playerName1, String playerName2) {
         Player player1 = findByName(playerName1);
         Player player2 = findByName(playerName2);
